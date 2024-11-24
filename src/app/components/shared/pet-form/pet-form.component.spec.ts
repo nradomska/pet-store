@@ -78,10 +78,10 @@ describe('PetFormComponent', () => {
 
   describe('submitForm', () => {
     it('should emit event with form value', () => {
-      spyOn(component.onSubmit, 'emit');
+      spyOn(component.submitEvent, 'emit');
       component.submitForm();
 
-      expect(component.onSubmit.emit).toHaveBeenCalled();
+      expect(component.submitEvent.emit).toHaveBeenCalled();
     });
   });
 });
