@@ -58,6 +58,10 @@
             @if (!photoUrlsForm.controls[i].untouched && photoUrlsForm.controls[i].errors?.['forbiddenChars']) {
               <mat-error> Field contains forbidden characters.</mat-error>
             }
+
+            @if (!photoUrlsForm.controls[i].untouched && photoUrlsForm.controls[i].errors?.['invalidUrl']) {
+              <mat-error>This url is invalid.</mat-error>
+            }
           </mat-form-field>
 
           @if (i > 0) {

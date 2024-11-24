@@ -3,7 +3,8 @@
   <div class="pets-view__filters">
     <div class="pets-view__filter">
       <mat-form-field>
-        <input class="pets-view__filter-by-name" matInput type="text" [value]="filterParams.name" (keyup)="filterByName($event)" placeholder="Filter by name">
+        <input class="pets-view__filter-by-name" matInput type="text" [value]="filterParams.name"
+               (keyup)="filterByName($event)" placeholder="Filter by name">
       </mat-form-field>
     </div>
     <div class="pets-view__filter">
@@ -34,7 +35,9 @@
       <td mat-cell *matCellDef="let pet">
         @if (pet.photoUrls; as photos) {
           @for (url of photos; track url) {
-            <img width="30px" [src]="url" alt="" />
+            <div>
+              <img class="pets-view__img" [src]="url" [alt]="url" />
+            </div>
           }
         }</td>
     </ng-container>
@@ -63,9 +66,12 @@
           <span class="pets-view__invalid">INVALID ID</span>
         } @else {
           <div class="pets-view__action-buttons">
-            <a class="pets-view__action-button pets-view__action-button--edit" mat-stroked-button [routerLink]="['/edit', pet.id]">Edit</a>
+            <a class="pets-view__action-button pets-view__action-button--edit" mat-stroked-button
+               [routerLink]="['/edit', pet.id]">Edit</a>
             <button class="pets-view__action-button" mat-stroked-button (click)="openDetails(pet.id)">Details</button>
-            <button class="pets-view__action-button pets-view__action-button--delete" mat-stroked-button (click)="safeDelete(pet.id)">Delete</button>
+            <button class="pets-view__action-button pets-view__action-button--delete" mat-stroked-button
+                    (click)="safeDelete(pet.id)">Delete
+            </button>
           </div>
         }
       </td>

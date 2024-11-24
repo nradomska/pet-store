@@ -178,11 +178,11 @@ export class PetsViewComponent {
     this.dataSource.sortingDataAccessor = (data: Pet, property: string): string => {
       switch (property) {
         case 'category':
-          return data[property]?.name.toLocaleLowerCase();
+          return data[property]?.name?.toLocaleLowerCase();
         case 'tags':
-          return data[property][0]?.name.toLocaleLowerCase();
+          return data[property] && data[property][0]?.name?.toLocaleLowerCase();
         case 'photoUrls':
-          return data[property][0]?.toLocaleLowerCase();
+          return data[property] && data[property][0]?.toLocaleLowerCase();
         case 'name':
         case 'status':
           return data[property]?.toLocaleLowerCase();

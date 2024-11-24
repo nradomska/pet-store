@@ -20,6 +20,7 @@ import { MatSelect } from '@angular/material/select';
 import { randomId } from '../../../utils/random-id';
 import { MatIcon } from '@angular/material/icon';
 import { forbiddenCharsValidator } from '../../../validators/forbidden-chars.validator';
+import { urlValidator } from '../../../validators/url.validator';
 
 @Component({
   selector: 'app-pet-form',
@@ -80,7 +81,7 @@ export class PetFormComponent implements OnInit {
 
   public addPhotoUrl(e?: MouseEvent): void {
     e?.preventDefault();
-    this.photoUrlsForm.push(new FormControl('', forbiddenCharsValidator));
+    this.photoUrlsForm.push(new FormControl('', [forbiddenCharsValidator, urlValidator]));
   }
 
   public deletePhotoUrl(e: MouseEvent, photoId: number): void {
@@ -114,7 +115,7 @@ export class PetFormComponent implements OnInit {
         name: ['', forbiddenCharsValidator],
       }),
       name: ['', [Validators.required, forbiddenCharsValidator]],
-      photoUrls: this.fb.array([['', [Validators.required, forbiddenCharsValidator]]]),
+      photoUrls: this.fb.array([['', [Validators.required, forbiddenCharsValidator, urlValidator]]]),
       tags: this.fb.array([this.fb.group({
         id: ['0'],
         name: [''],

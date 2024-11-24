@@ -38,6 +38,11 @@
     font-weight: bold;
     color: red;
   }
+
+  &__img {
+    max-width: 100%;
+    max-height: 100%;
+  }
 }
 
 .mat-column-name,
@@ -47,10 +52,13 @@
 {
   flex: 0 0 15%;
   width: 15%;
+  max-width: 150px;
+  word-wrap: break-word;
 }
 
 .mat-column-tags,
 .mat-column-actions {
   flex: 0 0 20%;
   width: 20%;
+  word-wrap: break-word;
 }
