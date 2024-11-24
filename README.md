@@ -1,59 +1,59 @@
 # Pet Store
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.1.
+Aplikacja służąca do obsługi podstawowych funkcjonalności skelpu zoologicznego.
+Pozwala na dodawanie, edytowanie, usuwanie oraz wyświetlanie zwierząt dostępnych w systemie.
 
-## Development server
+## Uruchamianie
 
-To start a local development server, run:
+W celu uruchomienia aplikacji należy użyć komendy
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+lub
 ```bash
-ng generate component component-name
+npm run start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Testy jednostkowe
+
+W celu uruchomienia testów jednostkowych należy użyć komendy
 
 ```bash
-ng generate --help
+npm run test
 ```
 
-## Building
+## Testy end-to-end
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+W celu uruchomienia testów end-to-end należy użyć komendy
 
 ```bash
 npm run e2e
 ```
 
-## Running end-to-end tests
+## Wykorzystane techonolgie
+* Angular 19
+* Angular CLI
+* Angular material
+* rxjs
+* ESLint
+* typescript
+* Playwright
+* karma
+* jasmine
 
-For end-to-end (e2e) testing, run:
+## Architektura
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Aplikacja składa się z niezależnych standalone komponentów.
+Główne elementy aplikacji:
+* app 
+  * components
+    * add-pet, edit-pet, pet-details, pet-view - komponenty odpowiedzialne za główne funkcje aplikacji
+    * shared: komponenty współdzielone i wykorzystywane w więcej niż jednym miejscu
+  * interceptors
+  * pipes
+  * services
+  * validators
+  * models
+* tests-e2e
