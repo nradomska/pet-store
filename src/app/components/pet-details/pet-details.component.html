@@ -1,0 +1,31 @@
+@if (pet$ | async; as pet) {
+  <mat-card class="pet-details">
+    <mat-card-header class="pet-details__header">
+      <mat-card-title>{{ pet.name }}
+      </mat-card-title>
+      <app-status [status]="pet.status"></app-status>
+    </mat-card-header>
+    @if (pet.category) {
+      <div class="pet-details__category">
+        <mat-card-content>
+          <p>category: {{ pet.category.name }}</p>
+        </mat-card-content>
+      </div>
+    }
+    <div class="pet-details__imgs">
+      @if (pet.photoUrls.length) {
+        @for (url of pet.photoUrls; track url) {
+          <img class="pet-details__img" mat-card-image [src]="url" [alt]="pet.name">
+        }
+      }
+    </div>
+
+    @if (pet.tags.length) {
+      <div class="pet-details__tags">
+        <app-tags [tags]="pet.tags"></app-tags>
+      </div>
+    }
+  </mat-card>
+} @else {
+  <app-loader [isLoading]="true"></app-loader>
+}

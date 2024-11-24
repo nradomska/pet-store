@@ -1,0 +1,6 @@
+<app-go-back></app-go-back>
+@if (pet$ | async; as pet) {
+  <h1> Edit {{ pet.name }}</h1>
+  <app-loader [isLoading]="isLoading"></app-loader>
+  <app-pet-form (submitEvent)="onSubmit($event)" [pet]="pet"></app-pet-form>
+}

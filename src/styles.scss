@@ -1,0 +1,50 @@
+@use '@angular/material' as mat;
+
+:root {
+  @include mat.toolbar-overrides((
+    container-background-color: var(--mat-sys-primary),
+    container-text-color: white,
+  ));
+
+  .snackbar--success {
+    --mdc-snackbar-container-color: green;
+  }
+
+  .snackbar--error {
+    --mdc-snackbar-container-color: red;
+  }
+}
+
+
+html {
+  color-scheme: light;
+  font-family: 'Roboto', sans-serif;
+  @include mat.theme((
+    color: mat.$violet-palette,
+    typography: Roboto,
+    density: 0
+  ));
+}
+
+input {
+  &[readonly] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+  margin: 5px 0;
+
+  .mat-mdc-form-field-error-wrapper {
+    padding: 0;
+  }
+}
+
+.d-none {
+  display: none !important;
+}
+
+.w-100 {
+  width: 100%;
+}

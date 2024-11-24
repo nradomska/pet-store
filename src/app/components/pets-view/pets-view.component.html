@@ -1,0 +1,79 @@
+<div class="pets-view">
+  <app-loader [isLoading]="isLoading"></app-loader>
+  <div class="pets-view__filters">
+    <div class="pets-view__filter">
+      <mat-form-field>
+        <input matInput type="text" [value]="filterParams.name" (keyup)="filterByName($event)" placeholder="Filter by name">
+      </mat-form-field>
+    </div>
+    <div class="pets-view__filter">
+      <mat-form-field>
+        <mat-label>Filter by status</mat-label>
+        <mat-select [(value)]="filterParams.status">
+          @for (status of PetStatus| keyvalue; track status) {
+            <mat-option [value]="status.value" (click)="filterByStatus(status.value)">{{ status.value }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <table matSort mat-table [dataSource]="dataSource" [fixedLayout]="true" class="mat-elevation-z8 pets-table">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let pet"> {{ pet.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Category</th>
+      <td mat-cell *matCellDef="let pet"> {{ pet.category?.name || '-' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="photoUrls">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Photos</th>
+      <td mat-cell *matCellDef="let pet">
+        @if (pet.photoUrls; as photos) {
+          @for (url of photos; track url) {
+            <img width="30px" [src]="url" alt="" />
+          }
+        }</td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="tags">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tags</th>
+      <td mat-cell *matCellDef="let pet">
+        @if (pet.tags) {
+          <app-tags [tags]="pet.tags"></app-tags>
+        }
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status</th>
+      <td mat-cell *matCellDef="let pet">
+        <app-status [status]="pet.status"></app-status>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions</th>
+      <td mat-cell *matCellDef="let pet">
+        @if (pet.id.toString().startsWith(INVALID_ID)) {
+          <span class="pets-view__invalid">INVALID ID</span>
+        } @else {
+          <div class="pets-view__action-buttons">
+            <a class="pets-view__action-button" mat-stroked-button [routerLink]="['/edit', pet.id]">Edit</a>
+            <button class="pets-view__action-button" mat-stroked-button (click)="openDetails(pet.id)">Details</button>
+            <button class="pets-view__action-button pets-view__action-button--delete" mat-stroked-button (click)="safeDelete(pet.id)">Delete</button>
+          </div>
+        }
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[20, 50, 100]">
+  </mat-paginator>
+</div>

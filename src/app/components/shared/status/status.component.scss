@@ -1,0 +1,18 @@
+.status {
+  padding: 5px 7px;
+  border-radius: 20px;
+  text-align: center;
+  color: white;
+
+  &--available {
+    background-color: green;
+  }
+
+  &--sold {
+    background-color: orange;
+  }
+
+  &--pending {
+    background-color: dodgerblue;
+  }
+}

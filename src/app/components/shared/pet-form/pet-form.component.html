@@ -1,0 +1,110 @@
+<form class="pet-form" [formGroup]="form" (ngSubmit)="submitForm()">
+  <mat-form-field class="pet-form__field">
+    <mat-label>Name</mat-label>
+    <input matInput type="text" formControlName="name" placeholder="Name">
+    @if (!form.controls['name'].untouched && form.controls['name'].errors?.['required']) {
+      <mat-error> This field is required.</mat-error>
+    }
+    @if (!form.controls['name'].untouched && form.controls['name'].errors?.['forbiddenChars']) {
+      <mat-error> Field contains forbidden characters.</mat-error>
+    }
+  </mat-form-field>
+
+  <div class="w-100" [formGroup]="categoryForm">
+    <mat-form-field class="d-none">
+      <input matInput
+             readonly
+             formControlName="id"
+             placeholder="Category id">
+    </mat-form-field>
+    <mat-form-field class="pet-form__field">
+      <mat-label>Category</mat-label>
+      <input matInput type="text" formControlName="name"
+             placeholder="Category name">
+      @if (!categoryForm.controls['name'].untouched && categoryForm.controls['name'].errors?.['forbiddenChars']) {
+        <mat-error> Field contains forbidden characters.</mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <mat-form-field class="pet-form__field">
+    <mat-label>Select status</mat-label>
+    <mat-select formControlName="status">
+      @for (status of PetStatus | keyvalue; track status) {
+        <mat-option [value]="status.value">
+          {{ status.value }}
+        </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <div class="w-100 pet-form__group" formArrayName="photoUrls">
+    <div class="group__container">
+      <div class="group__header">
+        Photo URLs
+      </div>
+      @for (url of photoUrlsForm.controls; track url; let i = $index) {
+        <div class="group__row">
+          <mat-form-field>
+            <mat-label>Photo url</mat-label>
+            <input matInput
+                   type="text"
+                   [formControlName]="i"
+                   placeholder="Photo url">
+            @if (!photoUrlsForm.controls[i].untouched && photoUrlsForm.controls[i].errors?.['required']) {
+              <mat-error> This field is required.</mat-error>
+            }
+
+            @if (!photoUrlsForm.controls[i].untouched && photoUrlsForm.controls[i].errors?.['forbiddenChars']) {
+              <mat-error> Field contains forbidden characters.</mat-error>
+            }
+          </mat-form-field>
+
+          @if (i > 0) {
+            <button mat-icon-button (click)="deletePhotoUrl($event, i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          }
+        </div>
+      }
+
+      <button mat-raised-button (click)="addPhotoUrl($event)">
+        Add next photo url
+      </button>
+    </div>
+  </div>
+
+  <div class="w-100 pet-form__group" formArrayName="tags">
+    <div class="group__container">
+      <div class="group__header">
+        Tags
+      </div>
+      @for (tagForm of tagsForm.controls; track tagForm; let i = $index) {
+        <div class="group__row" [formGroup]="tagForm | formGroup">
+          <mat-form-field class="d-none">
+            <input matInput
+                   readonly
+                   formControlName="id"
+                   placeholder="Tag id">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Tag name</mat-label>
+            <input matInput formControlName="name"
+                   type="text"
+                   placeholder="Tag name">
+          </mat-form-field>
+          <button mat-icon-button (click)="deleteTags($event, i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      }
+      <button mat-raised-button (click)="addTags($event)">
+        Add next tag
+      </button>
+    </div>
+  </div>
+
+  <div class="pet-form__submit">
+    <button [disabled]="form.invalid" mat-flat-button color="accent">Submit</button>
+  </div>
+</form>
