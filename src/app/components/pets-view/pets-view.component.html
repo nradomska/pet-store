@@ -3,13 +3,13 @@
   <div class="pets-view__filters">
     <div class="pets-view__filter">
       <mat-form-field>
-        <input matInput type="text" [value]="filterParams.name" (keyup)="filterByName($event)" placeholder="Filter by name">
+        <input class="pets-view__filter-by-name" matInput type="text" [value]="filterParams.name" (keyup)="filterByName($event)" placeholder="Filter by name">
       </mat-form-field>
     </div>
     <div class="pets-view__filter">
       <mat-form-field>
         <mat-label>Filter by status</mat-label>
-        <mat-select [(value)]="filterParams.status">
+        <mat-select class="pets-view__filter-by-status" [(value)]="filterParams.status">
           @for (status of PetStatus| keyvalue; track status) {
             <mat-option [value]="status.value" (click)="filterByStatus(status.value)">{{ status.value }}</mat-option>
           }
@@ -63,7 +63,7 @@
           <span class="pets-view__invalid">INVALID ID</span>
         } @else {
           <div class="pets-view__action-buttons">
-            <a class="pets-view__action-button" mat-stroked-button [routerLink]="['/edit', pet.id]">Edit</a>
+            <a class="pets-view__action-button pets-view__action-button--edit" mat-stroked-button [routerLink]="['/edit', pet.id]">Edit</a>
             <button class="pets-view__action-button" mat-stroked-button (click)="openDetails(pet.id)">Details</button>
             <button class="pets-view__action-button pets-view__action-button--delete" mat-stroked-button (click)="safeDelete(pet.id)">Delete</button>
           </div>

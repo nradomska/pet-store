@@ -11,7 +11,7 @@ import { PetStatus } from '../../models/status.enum';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { RouterLink } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { catchError, EMPTY, finalize, switchMap, take, filter } from 'rxjs';
+import { catchError, EMPTY, finalize, switchMap, take, filter, tap } from 'rxjs';
 import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
 import { StatusComponent } from '../shared/status/status.component';
 import { TagsComponent } from '../shared/tags/tags.component';
@@ -148,6 +148,7 @@ export class PetsViewComponent {
     dialogRef.afterClosed()
       .pipe(
         filter(confirmed => Boolean(confirmed)),
+        tap(() => {this.isLoading = true}),
         catchError((e: HttpErrorResponse) => {
           this.snackBarService.showSnackBar(`An error occurred: ${e.message}`, AlertType.ERROR);
           return EMPTY;

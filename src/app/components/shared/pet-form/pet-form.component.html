@@ -1,7 +1,7 @@
 <form class="pet-form" [formGroup]="form" (ngSubmit)="submitForm()">
   <mat-form-field class="pet-form__field">
     <mat-label>Name</mat-label>
-    <input matInput type="text" formControlName="name" placeholder="Name">
+    <input class="pet-form__name" matInput type="text" formControlName="name" placeholder="Name">
     @if (!form.controls['name'].untouched && form.controls['name'].errors?.['required']) {
       <mat-error> This field is required.</mat-error>
     }
@@ -19,7 +19,7 @@
     </mat-form-field>
     <mat-form-field class="pet-form__field">
       <mat-label>Category</mat-label>
-      <input matInput type="text" formControlName="name"
+      <input class="pet-form__category" matInput type="text" formControlName="name"
              placeholder="Category name">
       @if (!categoryForm.controls['name'].untouched && categoryForm.controls['name'].errors?.['forbiddenChars']) {
         <mat-error> Field contains forbidden characters.</mat-error>
@@ -47,7 +47,7 @@
         <div class="group__row">
           <mat-form-field>
             <mat-label>Photo url</mat-label>
-            <input matInput
+            <input class="pet-form__photo" matInput
                    type="text"
                    [formControlName]="i"
                    placeholder="Photo url">
@@ -89,7 +89,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Tag name</mat-label>
-            <input matInput formControlName="name"
+            <input class="pet-form__tag" matInput formControlName="name"
                    type="text"
                    placeholder="Tag name">
           </mat-form-field>
