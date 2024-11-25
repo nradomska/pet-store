@@ -5,6 +5,12 @@ Pozwala na dodawanie, edytowanie, usuwanie oraz wyświetlanie zwierząt dostępn
 
 ## Uruchamianie
 
+Przed pierwszym uruchomieniem
+
+```bash
+npm i
+```
+
 W celu uruchomienia aplikacji należy użyć komendy
 
 ```bash
@@ -25,6 +31,12 @@ npm run test
 ```
 
 ## Testy end-to-end
+
+Przed pierwszym uruchomieniem
+
+```bash
+npx playwright install
+```
 
 W celu uruchomienia testów end-to-end należy użyć komendy
 

@@ -25,4 +25,14 @@ describe('ConfirmDialogComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('onConfirmClick', () => {
+    it('should close dialog', () => {
+      component['dialogRef'].close = () => {};
+      spyOn(component['dialogRef'], 'close');
+      component.onConfirmClick();
+
+      expect(component['dialogRef'].close).toHaveBeenCalled();
+    });
+  });
 });

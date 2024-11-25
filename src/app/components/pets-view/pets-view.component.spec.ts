@@ -86,11 +86,12 @@ describe('PetsViewComponent', () => {
     it('should open dialog', () => {
       spyOn(component['dialog'], 'open').and.returnValue({
         afterClosed: () => of(true),
-        componentInstance: {}
+        componentInstance: {},
       } as MatDialogRef<any>);
       component.openDetails(petMock.id);
 
       expect(component['dialog'].open).toHaveBeenCalled();
     });
   });
+
 });

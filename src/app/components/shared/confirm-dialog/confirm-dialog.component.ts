@@ -7,6 +7,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
+import { DialogData } from '../../../models/dialog.interface';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -19,24 +20,21 @@ import { MatButton } from '@angular/material/button';
   templateUrl: './confirm-dialog.component.html',
   styleUrl: './confirm-dialog.component.scss',
 })
+
 export class ConfirmDialogComponent {
-  message: string = 'Are you sure?';
-  confirmButtonText = 'Yes';
-  cancelButtonText = 'Cancel';
+  public message: string = 'Are you sure?';
+  public confirmButtonText: string = 'Yes';
+  public cancelButtonText: string = 'Cancel';
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: any,
+    @Inject(MAT_DIALOG_DATA) private data: DialogData,
     private dialogRef: MatDialogRef<ConfirmDialogComponent>) {
-    if (data) {
-      this.message = data.message || this.message;
-      if (data.buttonText) {
-        this.confirmButtonText = data.buttonText.ok || this.confirmButtonText;
-        this.cancelButtonText = data.buttonText.cancel || this.cancelButtonText;
-      }
-    }
+    this.message = data.message || this.message;
+    this.confirmButtonText = data.buttonText?.ok || this.confirmButtonText;
+    this.cancelButtonText = data.buttonText?.cancel || this.cancelButtonText;
   }
 
-  onConfirmClick(): void {
+  public onConfirmClick(): void {
     this.dialogRef.close(true);
   }
 }
